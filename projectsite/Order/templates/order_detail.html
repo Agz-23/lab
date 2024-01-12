@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Order #{{ order.id }}</h2>
+
+  <h3>Order Details</h3>
+  <p>Date Ordered: {{ order.date_ordered }}</p>
+  <p>Total Amount: ${{ order.total_amount }}</p>
+
+
+  <h3>Products</h3>
+<ul>
+  {% if order.orderitem_set.all %}
+    {% for item in order.orderitem_set.all %}
+      <li>{{ item.product.name }} - Quantity: {{ item.quantity }} - Price: ${{ item.product.price }}</li>
+    {% endfor %}
+  {% else %}
+    <li>No items in the order</li>
+  {% endif %}
+</ul>
+{% endblock %}
